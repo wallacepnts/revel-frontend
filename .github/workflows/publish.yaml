@@ -57,8 +57,8 @@ jobs:
           build-args: |
             PUBLIC_VERSION=${{ github.event.release.tag_name }}
           tags: |
-            ghcr.io/letsrevel/revel-frontend:latest
-            ghcr.io/letsrevel/revel-frontend:${{ github.event.release.tag_name }}
+            ghcr.io/${{ github.repository_owner }}/revel-frontend:latest
+            ghcr.io/${{ github.repository_owner }}/revel-frontend:${{ github.event.release.tag_name }}
 
       # Ops signal: fires only after the image is pullable from GHCR. Failure
       # (Discord down, missing secret) must never fail the publish job.
@@ -73,4 +73,4 @@ jobs:
           fi
           curl -sf --max-time 10 -X POST "$DISCORD_WEBHOOK_URL" \
             -H "Content-Type: application/json" \
-            -d "{\"content\": \"📦 \`ghcr.io/letsrevel/revel-frontend:${{ github.event.release.tag_name }}\` is published and ready to deploy — ${{ github.event.release.html_url }}\"}"
+            -d "{\"content\": \"📦 \`ghcr.io/${{ github.repository_owner }}/revel-frontend:${{ github.event.release.tag_name }}\` is published and ready to deploy — ${{ github.event.release.html_url }}\"}"
