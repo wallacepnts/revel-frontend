@@ -30,14 +30,14 @@
 		--card-foreground: 173 40% 8%;
 		--popover: 0 0% 100%;
 		--popover-foreground: 173 40% 8%;
-		--primary: 270 70% 48%; /* Hearty Purple */
+		--primary: 173 30% 6%; /* DuRock: tinta */
 		--primary-foreground: 0 0% 100%;
 		--secondary: 226 95% 85%; /* periwinkle chip */
 		--secondary-foreground: 226 65% 20%;
 		--muted: 268 40% 92%;
 		--muted-foreground: 268 18% 32%;
-		--accent: 3 76% 44%; /* the heart: crimson pop */
-		--accent-foreground: 0 0% 100%;
+		--accent: 41 100% 44%; /* DuRock: dourado */
+		--accent-foreground: 0 0% 6%;
 		--highlight: 38 94% 56%; /* amber badge/pop */
 		--highlight-foreground: 30 55% 12%;
 		--destructive: 350 78% 30%; /* maroon, never brand crimson */
@@ -74,7 +74,7 @@
 		--brand-bluesky: 211 99% 53%; /* #1185FE — 3.26:1 on background, 3.68:1 on card (light); 4.97:1/4.55:1 (dark) */
 		--border: 268 35% 84%;
 		--input: 268 35% 84%;
-		--ring: 270 70% 48%;
+		--ring: 173 30% 6%;
 		--radius: 1.25rem; /* the signature: sticker corners everywhere */
 		/* Logo gradient (RevelMark): Hearty Purple → Light Crimson. */
 		--logo-from: hsl(270 70% 55%);
@@ -111,14 +111,14 @@
 		--card-foreground: 0 0% 97%;
 		--popover: 270 30% 14%;
 		--popover-foreground: 0 0% 97%;
-		--primary: 268 60% 72%; /* palette Lavender as the glow, ink label */
-		--primary-foreground: 173 40% 8%;
+		--primary: 0 0% 98%; /* DuRock: claro sobre escuro */
+		--primary-foreground: 0 0% 6%;
 		--secondary: 226 45% 26%;
 		--secondary-foreground: 226 90% 88%;
 		--muted: 270 25% 18%;
 		--muted-foreground: 270 12% 70%;
-		--accent: 3 85% 62%; /* neon heart, ink label */
-		--accent-foreground: 173 40% 8%;
+		--accent: 50 100% 52%; /* DuRock: dourado no escuro */
+		--accent-foreground: 0 0% 6%;
 		--highlight: 38 94% 60%;
 		--highlight-foreground: 30 60% 10%;
 		--destructive: 0 70% 45%; /* FILL only: white label = 5.88:1; as TEXT it is 3.11:1 on --background / 2.85:1 on --card (issue #781) */
@@ -144,7 +144,7 @@
 		--info-foreground: 173 40% 8%;
 		--border: 270 25% 20%;
 		--input: 270 25% 20%;
-		--ring: 268 60% 72%;
+		--ring: 0 0% 98%;
 		--brand-telegram-text: 200 85% 60%; /* 8.0:1 on dark background, 7.3:1 on dark popover (hand-verified) */
 		/* See the light-mode definition: ink casts no shadow on aubergine. */
 		--poster-shadow: 0 10px 30px hsl(0 0% 0% / 0.5);
