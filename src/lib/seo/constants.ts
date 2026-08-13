@@ -12,8 +12,16 @@ export const OG_LOCALE: Record<Lang, string> = {
 	pt: 'pt_PT'
 };
 
-export const SITE_NAME = 'Revel';
-export const TWITTER_SITE = '@letsrevel';
+// The instance's identity, configurable so a self-hosted deployment does not
+// have to patch source to carry its own name — same reasoning as
+// PUBLIC_DEFAULT_LANGUAGE. `$env/dynamic/public` rather than `static`: it is
+// what api.ts and i18n.ts already use, it is read at runtime (so one image
+// serves any instance), and an unset variable is simply undefined instead of
+// a build error. vitest.setup.ts mocks it to `{}`, so tests get the defaults.
+import { env } from '$env/dynamic/public';
+
+export const SITE_NAME = env.PUBLIC_SITE_NAME || 'Revel';
+export const TWITTER_SITE = env.PUBLIC_TWITTER_SITE || '@letsrevel';
 
 // Versioned shareable assets (in static/). They are served with a 1-year
 // immutable cache and scrapers (LinkedIn, Facebook, …) key their image

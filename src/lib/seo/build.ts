@@ -111,7 +111,7 @@ function getSeriesImage(series: EventSeriesRetrieveSchema): string | undefined {
 	return first ? getBackendUrl(first) : undefined;
 }
 
-const DEFAULT_OG_IMAGE_ALT = 'Revel — Event Management for Communities';
+const DEFAULT_OG_IMAGE_ALT = `${SITE_NAME} — Event Management for Communities`;
 
 function defaultOgImage(origin: string): string {
 	return `${origin}${OG_IMAGE_PATH}`;
@@ -145,13 +145,13 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 	switch (input.kind) {
 		case 'home': {
-			const title = 'Revel — Event Management for Communities';
+			const title = `${SITE_NAME} — Event Management for Communities`;
 			const description =
 				'Discover community events, connect with organizers, and create unforgettable experiences. Open-source event management and ticketing platform.';
 			// og:description has a tighter budget than the meta description:
 			// social previews truncate around ~125 chars on mobile (#624).
 			const ogDescription =
-				'Discover community events, connect with organizers, and create unforgettable experiences on Revel, the open-source platform.';
+				`Discover community events, connect with organizers, and create unforgettable experiences on ${SITE_NAME}, the open-source platform.`;
 			return {
 				title,
 				description,
@@ -180,9 +180,9 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 		}
 
 		case 'events-listing': {
-			const title = 'Browse Events | Revel';
+			const title = `Browse Events | ${SITE_NAME}`;
 			const description =
-				'Discover community events happening near you. Find concerts, workshops, meetups, and more on Revel.';
+				`Discover community events happening near you. Find concerts, workshops, meetups, and more on ${SITE_NAME}.`;
 			return {
 				title,
 				description,
@@ -216,12 +216,12 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 		}
 
 		case 'orgs-listing': {
-			const title = 'Discover Organizations | Revel';
+			const title = `Discover Organizations | ${SITE_NAME}`;
 			const description =
-				'Browse and discover community organizations on Revel. Find event organizers, communities, and groups creating amazing experiences.';
+				`Browse and discover community organizations on ${SITE_NAME}. Find event organizers, communities, and groups creating amazing experiences.`;
 			// Shorter variant for social previews (~125-char budget, #624).
 			const ogDescription =
-				'Browse community organizations on Revel — event organizers, communities, and groups creating amazing experiences.';
+				`Browse community organizations on ${SITE_NAME} — event organizers, communities, and groups creating amazing experiences.`;
 			const ld: object[] = [
 				generateBreadcrumbJsonLd([
 					{ name: 'Home', url: origin },
@@ -229,7 +229,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 				])
 			];
 			if (input.items?.length) {
-				ld.push(generateItemListJsonLd(input.items, 'Organizations on Revel'));
+				ld.push(generateItemListJsonLd(input.items, `Organizations on ${SITE_NAME}`));
 			}
 			return {
 				title,
@@ -263,7 +263,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 			const desc = stripMarkup(event.description);
 			const truncated = truncate(desc, 155);
 			const image = getEventImage(event);
-			const title = `${event.name} | Revel`;
+			const title = `${event.name} | ${SITE_NAME}`;
 			const description = truncated || `Join ${event.name} organized by ${event.organization.name}`;
 			return {
 				title,
@@ -308,8 +308,8 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 			const desc = stripMarkup(org.description);
 			const truncated = truncate(desc, 155);
 			const image = getOrgImage(org);
-			const title = `${org.name} | Revel`;
-			const description = truncated || `${org.name} on Revel - Community events and experiences`;
+			const title = `${org.name} | ${SITE_NAME}`;
+			const description = truncated || `${org.name} on ${SITE_NAME} - Community events and experiences`;
 			return {
 				title,
 				description,
@@ -329,7 +329,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 				twitter: {
 					card: 'summary_large_image',
 					title: org.name,
-					description: truncate(desc, 200) || `${org.name} on Revel`,
+					description: truncate(desc, 200) || `${org.name} on ${SITE_NAME}`,
 					image,
 					imageAlt: image ? org.name : undefined,
 					site: TWITTER_SITE
@@ -351,7 +351,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 			const desc = stripMarkup(series.description);
 			const truncated = truncate(desc, 155);
 			const image = getSeriesImage(series);
-			const title = `${series.name} | ${series.organization.name} | Revel`;
+			const title = `${series.name} | ${series.organization.name} | ${SITE_NAME}`;
 			const description =
 				truncated || `${series.name} - Event series by ${series.organization.name}`;
 			return {
@@ -428,8 +428,8 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 		case 'legal': {
 			const titles: Record<typeof input.doc, string> = {
-				privacy: 'Privacy Policy | Revel',
-				terms: 'Terms of Service | Revel'
+				privacy: `Privacy Policy | ${SITE_NAME}`,
+				terms: `Terms of Service | ${SITE_NAME}`
 			};
 			return {
 				title: titles[input.doc],
@@ -458,11 +458,11 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 		case 'auth': {
 			const titles: Record<typeof input.page, string> = {
-				login: 'Log in | Revel',
-				register: 'Create your account | Revel',
-				'password-reset': 'Reset your password | Revel',
-				verify: 'Verify your account | Revel',
-				unsubscribe: 'Unsubscribe | Revel'
+				login: `Log in | ${SITE_NAME}`,
+				register: `Create your account | ${SITE_NAME}`,
+				'password-reset': `Reset your password | ${SITE_NAME}`,
+				verify: `Verify your account | ${SITE_NAME}`,
+				unsubscribe: `Unsubscribe | ${SITE_NAME}`
 			};
 			const t = titles[input.page];
 			return {
