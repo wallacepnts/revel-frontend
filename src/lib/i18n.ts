@@ -13,6 +13,7 @@ import {
 	type Locale
 } from '$lib/paraglide/runtime.js';
 import type { Handle } from '@sveltejs/kit';
+import { env } from '$env/dynamic/public';
 import { isEmbedPath } from '$lib/embed/constants';
 
 /**
@@ -22,8 +23,17 @@ export const SUPPORTED_LANGUAGES = [...locales];
 
 /**
  * Default language
+ *
+ * PUBLIC_DEFAULT_LANGUAGE permite que uma instância seja "em português" sem
+ * tocar em componente nenhum: é o idioma usado quando o visitante não pediu
+ * outro (sem ?lang=, sem cookie e sem Accept-Language compatível). Cai em
+ * baseLocale quando a variável não existe ou traz um idioma não suportado.
  */
-export const DEFAULT_LANGUAGE = baseLocale;
+const configuredDefault = env.PUBLIC_DEFAULT_LANGUAGE;
+export const DEFAULT_LANGUAGE: Locale =
+	configuredDefault && (locales as readonly string[]).includes(configuredDefault)
+		? (configuredDefault as Locale)
+		: baseLocale;
 
 /**
  * Type guard: is the given string one of the supported locales?
