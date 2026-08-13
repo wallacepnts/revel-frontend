@@ -76,9 +76,10 @@
 		--input: 268 35% 84%;
 		--ring: 173 30% 6%;
 		--radius: 1.25rem; /* the signature: sticker corners everywhere */
-		/* Logo gradient (RevelMark): Hearty Purple → Light Crimson. */
-		--logo-from: hsl(270 70% 55%);
-		--logo-to: hsl(3 79% 53%);
+		/* DuRock: tinta → dourado. Pinta o monograma e a faixa do ingresso
+		   (MyTicket, MyTicketModal), que em preto chapado ficaria sem graça. */
+		--logo-from: hsl(173 30% 6%);
+		--logo-to: hsl(41 100% 44%);
 		/* Poster panels (landing page). Fixed brand colors, identical in dark
 		   mode on purpose: the panels behave like imagery, not like surfaces.
 		   crimson-deep exists because white body text on raw Light Crimson is
@@ -145,6 +146,11 @@
 		--border: 270 25% 20%;
 		--input: 270 25% 20%;
 		--ring: 0 0% 98%;
+		/* DuRock: a marca inverte no escuro. Sem isto ela herda a tinta do
+		   :root, que é quase a cor do fundo — o monograma some no cabeçalho,
+		   defeito que só apareceu olhando a tela. */
+		--logo-from: hsl(0 0% 98%);
+		--logo-to: hsl(50 100% 52%);
 		--brand-telegram-text: 200 85% 60%; /* 8.0:1 on dark background, 7.3:1 on dark popover (hand-verified) */
 		/* See the light-mode definition: ink casts no shadow on aubergine. */
 		--poster-shadow: 0 10px 30px hsl(0 0% 0% / 0.5);

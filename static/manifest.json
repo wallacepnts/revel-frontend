@@ -1,17 +1,17 @@
 {
-	"name": "Revel - Community Events",
-	"short_name": "Revel",
-	"description": "Discover LGBTQ+, queer, and sex-positive community events near you",
+	"name": "DuRock RJ - Shows de rock",
+	"short_name": "DuRock RJ",
+	"description": "Shows de rock no Rio de Janeiro: descubra a agenda, confirme presença e compre ingresso",
 	"start_url": "/",
 	"display": "standalone",
-	"background_color": "#1a0b2e",
-	"theme_color": "#8b5cf6",
+	"background_color": "#0d1211",
+	"theme_color": "#0d1211",
 	"orientation": "portrait-primary",
 	"icons": [
 		{
-			"src": "/logo.svg",
+			"src": "/logo-icon-512.png",
 			"sizes": "512x512",
-			"type": "image/svg+xml",
+			"type": "image/png",
 			"purpose": "any maskable"
 		},
 		{
@@ -24,25 +24,25 @@
 	"categories": ["social", "lifestyle", "entertainment"],
 	"shortcuts": [
 		{
-			"name": "Browse Events",
-			"short_name": "Events",
-			"description": "Discover upcoming events",
+			"name": "Ver a agenda",
+			"short_name": "Agenda",
+			"description": "Shows que estão por vir",
 			"url": "/events",
 			"icons": [
 				{
-					"src": "/logo.svg",
+					"src": "/logo-icon-512.png",
 					"sizes": "512x512"
 				}
 			]
 		},
 		{
-			"name": "My Dashboard",
-			"short_name": "Dashboard",
-			"description": "View your events and organizations",
+			"name": "Meu painel",
+			"short_name": "Painel",
+			"description": "Seus ingressos e organizações",
 			"url": "/dashboard",
 			"icons": [
 				{
-					"src": "/logo.svg",
+					"src": "/logo-icon-512.png",
 					"sizes": "512x512"
 				}
 			]

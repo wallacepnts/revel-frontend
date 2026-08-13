@@ -1,5 +1,39 @@
 import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vitest/config';
+import { fileURLToPath } from 'node:url';
+import { defineConfig, type Plugin } from 'vitest/config';
+
+// DuRock RJ: swap the upstream brand lockup for this fork's, without editing a
+// single upstream component. Five call sites import the mark and the wordmark
+// (Header, Footer, and three landing panels); this rewrites the resolution of
+// those two module ids, so every one of them draws the DuRock monogram.
+//
+// It is a resolveId hook rather than a `resolve.alias` entry because alias
+// matching happens before SvelteKit turns `$lib/...` into a real path, and a
+// `kit.alias` entry for an exact file was tried first and did NOT take effect —
+// `$lib` won. Matching the RESOLVED path is order-independent, so it holds no
+// matter how SvelteKit orders its own aliases.
+const BRAND_SWAPS: Record<string, string> = {
+	'src/lib/components/brand/RevelWordmark.svelte':
+		'src/lib/components/durock/DurockWordmark.svelte',
+	'src/lib/components/brand/RevelMark.svelte': 'src/lib/components/durock/DurockMark.svelte'
+};
+
+function durockBrand(): Plugin {
+	const root = fileURLToPath(new URL('.', import.meta.url));
+	return {
+		name: 'durock-brand',
+		enforce: 'pre',
+		async resolveId(source, importer, options) {
+			if (!source.includes('brand/Revel')) return null;
+			const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
+			if (!resolved) return null;
+			for (const [upstream, fork] of Object.entries(BRAND_SWAPS)) {
+				if (resolved.id.endsWith(upstream)) return root + fork;
+			}
+			return null;
+		}
+	};
+}
 
 // Under Vitest only, add the `svelte` resolve condition so bits-ui (which
 // ships only `types` + `svelte` export conditions) resolves from its main
@@ -9,7 +43,7 @@ import { defineConfig } from 'vitest/config';
 const viteResolve = process.env.VITEST ? { conditions: ['browser', 'svelte'] } : undefined;
 
 export default defineConfig({
-	plugins: [sveltekit()],
+	plugins: [durockBrand(), sveltekit()],
 	build: {
 		// Skip gzip-size reporting: it adds build time and hundreds of log lines in CI
 		reportCompressedSize: false
