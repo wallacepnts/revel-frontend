@@ -24,18 +24,18 @@
  */
 @layer base {
 	:root {
-		--background: 268 60% 96%; /* whisper lavender paper */
-		--foreground: 173 40% 8%; /* ink */
+		--background: 0 0% 100%; /* DuRock: papel branco (tema mono do upstream) */
+		--foreground: 173 30% 6%; /* tinta */
 		--card: 0 0% 100%;
-		--card-foreground: 173 40% 8%;
+		--card-foreground: 173 30% 6%;
 		--popover: 0 0% 100%;
-		--popover-foreground: 173 40% 8%;
+		--popover-foreground: 173 30% 6%;
 		--primary: 173 30% 6%; /* DuRock: tinta */
 		--primary-foreground: 0 0% 100%;
-		--secondary: 226 95% 85%; /* periwinkle chip */
-		--secondary-foreground: 226 65% 20%;
-		--muted: 268 40% 92%;
-		--muted-foreground: 268 18% 32%;
+		--secondary: 0 0% 95%; /* DuRock: cinza no lugar do periwinkle */
+		--secondary-foreground: 173 30% 10%;
+		--muted: 0 0% 96%;
+		--muted-foreground: 0 0% 38%;
 		--accent: 41 100% 44%; /* DuRock: dourado */
 		--accent-foreground: 0 0% 6%;
 		--highlight: 38 94% 56%; /* amber badge/pop */
@@ -72,8 +72,8 @@
 		--brand-instagram: 349 75% 57%; /* #E4405F — 3.60:1 on background, 4.06:1 on card (light); 4.50:1/4.12:1 (dark) */
 		--brand-facebook: 214 89% 52%; /* #1877F2 — 3.78:1 on background, 4.27:1 on card (light); 4.28:1/3.92:1 (dark) */
 		--brand-bluesky: 211 99% 53%; /* #1185FE — 3.26:1 on background, 3.68:1 on card (light); 4.97:1/4.55:1 (dark) */
-		--border: 268 35% 84%;
-		--input: 268 35% 84%;
+		--border: 0 0% 87%;
+		--input: 0 0% 87%;
 		--ring: 173 30% 6%;
 		--radius: 1.25rem; /* the signature: sticker corners everywhere */
 		/* DuRock: tinta → dourado. Pinta o monograma e a faixa do ingresso
@@ -106,18 +106,18 @@
 	}
 
 	.dark {
-		--background: 270 35% 10%; /* aubergine, not black — backstage light */
-		--foreground: 0 0% 97%;
-		--card: 270 30% 14%;
-		--card-foreground: 0 0% 97%;
-		--popover: 270 30% 14%;
-		--popover-foreground: 0 0% 97%;
+		--background: 0 0% 4%; /* DuRock: preto de verdade (tema mono do upstream) */
+		--foreground: 0 0% 98%;
+		--card: 0 0% 8%;
+		--card-foreground: 0 0% 98%;
+		--popover: 0 0% 8%;
+		--popover-foreground: 0 0% 98%;
 		--primary: 0 0% 98%; /* DuRock: claro sobre escuro */
 		--primary-foreground: 0 0% 6%;
-		--secondary: 226 45% 26%;
-		--secondary-foreground: 226 90% 88%;
-		--muted: 270 25% 18%;
-		--muted-foreground: 270 12% 70%;
+		--secondary: 0 0% 13%;
+		--secondary-foreground: 0 0% 96%;
+		--muted: 0 0% 12%;
+		--muted-foreground: 0 0% 62%;
 		--accent: 50 100% 52%; /* DuRock: dourado no escuro */
 		--accent-foreground: 0 0% 6%;
 		--highlight: 38 94% 60%;
@@ -143,8 +143,8 @@
 		--success-foreground: 173 40% 8%;
 		--info: 226 100% 82%; /* periwinkle glow, ink label */
 		--info-foreground: 173 40% 8%;
-		--border: 270 25% 20%;
-		--input: 270 25% 20%;
+		--border: 0 0% 17%;
+		--input: 0 0% 17%;
 		--ring: 0 0% 98%;
 		/* DuRock: a marca inverte no escuro. Sem isto ela herda a tinta do
 		   :root, que é quase a cor do fundo — o monograma some no cabeçalho,
