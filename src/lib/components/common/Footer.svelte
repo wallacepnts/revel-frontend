@@ -2,6 +2,8 @@
 	import { resolve } from '$app/paths';
 	import { env } from '$env/dynamic/public';
 	import { appStore } from '$lib/stores/app.svelte';
+	import Instagram from '$lib/components/icons/brand/Instagram.svelte';
+	import Youtube from '$lib/components/icons/brand/Youtube.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { getLocale } from '$lib/paraglide/runtime.js';
 	import RevelWordmark from '$lib/components/brand/RevelWordmark.svelte';
@@ -136,9 +138,34 @@
 							{m['nav.organizations']()}
 						</a>
 					</li>
-					<!-- DuRock: o GitHub do upstream e os formulários de feedback
-					     dele não são canais desta instância. As redes do DuRock
-					     entram aqui quando as URLs forem definidas. -->
+					<!-- Redes do DuRock. Os rótulos são nomes próprios, iguais em
+					     qualquer idioma, então não passam pelo catálogo: uma chave
+					     nova exigiria os seis locales para dizer "Instagram".
+					     O ícone herda currentColor em vez de usar a cor da marca —
+					     esta faixa é invertida, e um roxo do Instagram sobre ela
+					     não passaria no contraste que o resto do rodapé cumpre. -->
+					<li>
+						<a
+							href="https://instagram.com/durockrj"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="{footerLinkClass} inline-flex items-center gap-2"
+						>
+							<Instagram class="h-4 w-4" aria-hidden="true" />
+							Instagram
+						</a>
+					</li>
+					<li>
+						<a
+							href="https://youtube.com/@durockrj"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="{footerLinkClass} inline-flex items-center gap-2"
+						>
+							<Youtube class="h-4 w-4" aria-hidden="true" />
+							YouTube
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>
