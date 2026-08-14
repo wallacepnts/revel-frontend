@@ -2,11 +2,8 @@
 	import { resolve } from '$app/paths';
 	import { env } from '$env/dynamic/public';
 	import { appStore } from '$lib/stores/app.svelte';
-	import { Bug, Info } from '@lucide/svelte';
-	import Github from '$lib/components/icons/brand/Github.svelte';
 	import * as m from '$lib/paraglide/messages.js';
 	import { getLocale } from '$lib/paraglide/runtime.js';
-	import * as Tooltip from '$lib/components/ui/tooltip';
 	import RevelWordmark from '$lib/components/brand/RevelWordmark.svelte';
 
 	// Shared link treatment for the inverted band: this surface is a dark one
@@ -27,8 +24,6 @@
 	// a checkout without a populated .env still type-checks and falls back to 'dev'.
 	// Remove leading 'v' if present since we add it in the template.
 	const FRONTEND_VERSION = env.PUBLIC_VERSION ? env.PUBLIC_VERSION.replace(/^v/, '') : 'dev';
-	const FRONTEND_REPO = 'https://github.com/letsrevel/revel-frontend';
-	const BACKEND_REPO = 'https://github.com/letsrevel/revel-backend';
 
 	// Get backend version and demo mode from store
 	const backendVersion = $derived(appStore.backendVersion || 'Loading...');
@@ -37,41 +32,6 @@
 	// Landing page URLs based on current locale
 	// Landing pages are NOT paraglide-translated, they use /de/ and /it/ prefixes
 	const landingPagePrefix = $derived(getLocale() === 'en' ? '' : `/${getLocale()}`);
-
-	// Cache for release notes
-	const releaseNotesCache = $state<Record<string, string[] | null>>({});
-	const loadingNotes = $state<Record<string, boolean>>({});
-
-	async function fetchReleaseNotes(repo: 'frontend' | 'backend', version: string) {
-		const cacheKey = `${repo}-${version}`;
-		if (releaseNotesCache[cacheKey] !== undefined || loadingNotes[cacheKey]) return;
-
-		loadingNotes[cacheKey] = true;
-		try {
-			const repoName = repo === 'frontend' ? 'revel-frontend' : 'revel-backend';
-			const response = await fetch(
-				`https://api.github.com/repos/letsrevel/${repoName}/releases/tags/v${version}`
-			);
-			if (!response.ok) throw new Error('Not found');
-
-			const data = await response.json();
-			releaseNotesCache[cacheKey] = parseReleaseNotes(data.body);
-		} catch {
-			releaseNotesCache[cacheKey] = null;
-		} finally {
-			loadingNotes[cacheKey] = false;
-		}
-	}
-
-	function parseReleaseNotes(body: string | null): string[] {
-		if (!body) return [];
-		// Extract bullet points, strip author/PR links
-		return body
-			.split('\n')
-			.filter((line) => line.startsWith('* '))
-			.map((line) => line.replace(/^\* /, '').replace(/ by @.+$/, ''))
-			.filter(Boolean);
-	}
 </script>
 
 <!-- Inverted "band" echoing the poster ClosePanel: dark surface in BOTH
@@ -152,8 +112,10 @@
 							{m['footer.termsOfService']()}
 						</a>
 					</li>
+					<!-- DuRock: o e-mail de contato do upstream não atende ninguém
+					     daqui. Volta quando houver um endereço do DuRock. -->
 					<li>
-						<a href="mailto:contact@letsrevel.io" class={footerLinkClass}>
+						<a href="mailto:contato@durockrj.com.br" class={footerLinkClass}>
 							{m['footer.contact']()}
 						</a>
 					</li>
@@ -174,130 +136,24 @@
 							{m['nav.organizations']()}
 						</a>
 					</li>
-					<li>
-						<a
-							href="https://github.com/letsrevel"
-							target="_blank"
-							rel="noopener noreferrer"
-							class={footerLinkClass}
-						>
-							{m['footer.github']()}
-						</a>
-					</li>
-					<li>
-						<a
-							href="https://forms.gle/7wAqQXqrWk3X6Ddu7"
-							target="_blank"
-							rel="noopener noreferrer"
-							class={footerLinkClass}
-						>
-							{m['footer.sendFeedback']()}
-						</a>
-					</li>
+					<!-- DuRock: o GitHub do upstream e os formulários de feedback
+					     dele não são canais desta instância. As redes do DuRock
+					     entram aqui quando as URLs forem definidas. -->
 				</ul>
 			</div>
 		</div>
 
-		<!-- Version Info - Compact inline -->
-		<Tooltip.Provider>
-			<div
-				class="mt-8 flex flex-wrap items-center justify-center gap-4 border-t border-background/20 pt-6 text-xs text-background/70 dark:border-border dark:text-muted-foreground"
-			>
-				<Tooltip.Root>
-					<!-- The link itself is the tooltip trigger (child snippet): a default
-					     Trigger renders a <button> AROUND the <a>, an interactive-inside-
-					     interactive WCAG violation flagged on every page (#595). -->
-					<Tooltip.Trigger
-						onmouseenter={() => fetchReleaseNotes('frontend', FRONTEND_VERSION)}
-						onfocus={() => fetchReleaseNotes('frontend', FRONTEND_VERSION)}
-					>
-						{#snippet child({ props })}
-							<a
-								{...props}
-								href={FRONTEND_REPO}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="flex items-center gap-1.5 transition-colors hover:text-background dark:hover:text-foreground"
-								aria-label="{m['footer.frontend']()} repository on GitHub"
-							>
-								<Github class="h-3.5 w-3.5" aria-hidden="true" />
-								<span>FE v{FRONTEND_VERSION}</span>
-								<Info
-									class="h-3 w-3 text-background/50 dark:text-muted-foreground/70"
-									aria-hidden="true"
-								/>
-							</a>
-						{/snippet}
-					</Tooltip.Trigger>
-					<Tooltip.Content class="max-w-xs">
-						{#if loadingNotes[`frontend-${FRONTEND_VERSION}`]}
-							<p class="text-xs">{m['footer.loadingNotes']()}</p>
-						{:else if releaseNotesCache[`frontend-${FRONTEND_VERSION}`]?.length}
-							<ul class="space-y-1 text-xs">
-								{#each releaseNotesCache[`frontend-${FRONTEND_VERSION}`] as note, i (i)}
-									<li>- {note}</li>
-								{/each}
-							</ul>
-						{:else}
-							<p class="text-xs">{m['footer.noReleaseNotes']()}</p>
-						{/if}
-					</Tooltip.Content>
-				</Tooltip.Root>
-
-				<span class="text-background/45 dark:text-muted-foreground/50">|</span>
-
-				<Tooltip.Root>
-					<Tooltip.Trigger
-						onmouseenter={() => fetchReleaseNotes('backend', backendVersion)}
-						onfocus={() => fetchReleaseNotes('backend', backendVersion)}
-					>
-						{#snippet child({ props })}
-							<a
-								{...props}
-								href={BACKEND_REPO}
-								target="_blank"
-								rel="noopener noreferrer"
-								class="flex items-center gap-1.5 transition-colors hover:text-background dark:hover:text-foreground"
-								aria-label="{m['footer.backend']()} repository on GitHub"
-							>
-								<Github class="h-3.5 w-3.5" aria-hidden="true" />
-								<span>BE v{backendVersion}{isDemoMode ? ' (demo)' : ''}</span>
-								<Info
-									class="h-3 w-3 text-background/50 dark:text-muted-foreground/70"
-									aria-hidden="true"
-								/>
-							</a>
-						{/snippet}
-					</Tooltip.Trigger>
-					<Tooltip.Content class="max-w-xs">
-						{#if loadingNotes[`backend-${backendVersion}`]}
-							<p class="text-xs">{m['footer.loadingNotes']()}</p>
-						{:else if releaseNotesCache[`backend-${backendVersion}`]?.length}
-							<ul class="space-y-1 text-xs">
-								{#each releaseNotesCache[`backend-${backendVersion}`] as note, i (i)}
-									<li>- {note}</li>
-								{/each}
-							</ul>
-						{:else}
-							<p class="text-xs">{m['footer.noReleaseNotes']()}</p>
-						{/if}
-					</Tooltip.Content>
-				</Tooltip.Root>
-
-				<span class="text-background/45 dark:text-muted-foreground/50">|</span>
-
-				<a
-					href="https://forms.gle/c6ovKV92nMQEbR877"
-					target="_blank"
-					rel="noopener noreferrer"
-					class="flex items-center gap-1.5 transition-colors hover:text-background dark:hover:text-foreground"
-					aria-label={m['footer.reportBug']()}
-				>
-					<Bug class="h-3.5 w-3.5" aria-hidden="true" />
-					<span>{m['footer.reportBug']()}</span>
-				</a>
-			</div>
-		</Tooltip.Provider>
+		<!-- Version strip. DuRock: sem tooltip de notas de release — o original
+		     buscava na API do GitHub do letsrevel a cada visita de cada pessoa,
+		     de um repositório que não é o desta instância. A versão continua
+		     visível, que é o que serve para suporte. -->
+		<div
+			class="mt-8 flex flex-wrap items-center justify-center gap-4 border-t border-background/20 pt-6 text-xs text-background/70 dark:border-border dark:text-muted-foreground"
+		>
+			<span>FE v{FRONTEND_VERSION}</span>
+			<span class="text-background/45 dark:text-muted-foreground/50">|</span>
+			<span>BE v{backendVersion}{isDemoMode ? ' (demo)' : ''}</span>
+		</div>
 
 		<!-- Cookie Notice. Light: bg-background/10 (surface) composited over the
 		     opaque ink band, then text-background/90 composited over THAT
@@ -318,7 +174,7 @@
 
 		<!-- Copyright -->
 		<div class="mt-6 text-center text-sm text-background/70 dark:text-muted-foreground">
-			<p>&copy; {new Date().getFullYear()} Revel. {m['footer.copyright']()}</p>
+			<p>&copy; {new Date().getFullYear()} DuRock RJ. {m['footer.copyright']()}</p>
 		</div>
 	</div>
 </footer>
