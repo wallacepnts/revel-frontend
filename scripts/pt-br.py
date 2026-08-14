@@ -61,6 +61,8 @@ VOCABULARIO: list[tuple[str, str]] = [
     ("contacto", "contato"),
     ("moradas", "endereços"),
     (r"\bmorada\b", "endereço"),
+    ("câmaras", "câmeras"),
+    ("câmara", "câmera"),
     ("ecrãs", "telas"),
     ("ecrã", "tela"),
     ("telemóveis", "celulares"),
@@ -77,8 +79,23 @@ VOCABULARIO: list[tuple[str, str]] = [
     (r"n\.º", "nº"),
     ("a decorrer", "em andamento"),
     ("eliminação", "exclusão"),
+    # Achados ao ler as frases uma a uma — os marcadores automáticos não pegam
+    # palavra que só difere por um "c" ou por sufixo.
+    ("subscrições", "assinaturas"),
+    ("subscrição", "assinatura"),
+    ("subscreve", "assina"),
+    ("faturação", "faturamento"),
+    ("registados", "registrados"),
+    ("registadas", "registradas"),
+    ("registado", "registrado"),
+    ("registada", "registrada"),
+    ("contactar", "contatar"),
+    ("respetiva", "respectiva"),
+    ("respetivo", "respectivo"),
+    ("geridas", "gerenciadas"),
+    ("geridos", "gerenciados"),
+    ("proporcionalidade", "proporcionalidade"),
     (r"\bligação da reunião\b", "link da reunião"),
-    (r"\baplicação\b", "aplicativo"),
 ]
 
 # --------------------------------------------------------------------------
@@ -97,6 +114,12 @@ PRONOMES: list[tuple[str, str]] = [
 # 4. Gerúndio: "A carregar…" -> "Carregando…". Ancorado no "A " + infinitivo.
 # --------------------------------------------------------------------------
 GERUNDIO: dict[str, str] = {
+    # Como o gerúndio roda por ÚLTIMO, as chaves têm de ser as formas JÁ
+    # convertidas: "A guardar" vira "A salvar" na troca de vocabulário, e
+    # procurar por "guardar" aqui não acha mais nada. Por isso salvar/excluir
+    # aparecem ao lado de guardar/eliminar, e não no lugar deles.
+    "salvar": "salvando",
+    "excluir": "excluindo",
     "carregar": "carregando",
     "criar": "criando",
     "processar": "processando",
@@ -117,6 +140,43 @@ GERUNDIO: dict[str, str] = {
     "publicar": "publicando",
     "cancelar": "cancelando",
     "redirecionar": "redirecionando",
+    # Verbos que só apareceram ao olhar a tela: a lista era pequena demais e 84
+    # ocorrências passaram. Vem de dados, não de palpite — foram extraídos do
+    # próprio catálogo procurando "A <infinitivo>". Uma regra genérica por
+    # sufixo seria pior: "A cor" viraria "A condo", "A mulher" viraria
+    # "mulhendo". E "a partir de" fica FORA de propósito: ali é preposição.
+    "mostrar": "mostrando",
+    "editar": "editando",
+    "pedir": "pedindo",
+    "confirmar": "confirmando",
+    "usar": "usando",
+    "adicionar": "adicionando",
+    "seguir": "seguindo",
+    "duplicar": "duplicando",
+    "ligar": "conectando",
+    "mudar": "mudando",
+    "desativar": "desativando",
+    "participar": "participando",
+    "repor": "redefinindo",
+    "remover": "removendo",
+    "organizar": "organizando",
+    "converter": "convertendo",
+    "resgatar": "resgatando",
+    "reivindicar": "reivindicando",
+    "entrar": "entrando",
+    "sair": "saindo",
+    "reembolsar": "reembolsando",
+    "anular": "cancelando",
+    "validar": "validando",
+    "inicializar": "inicializando",
+    "desligar": "desligando",
+    "gravar": "gravando",
+    "aplicar": "aplicando",
+    "pausar": "pausando",
+    "retomar": "retomando",
+    "promover": "promovendo",
+    "fazer": "fazendo",
+    "encaminhar": "encaminhando",
 }
 
 # --------------------------------------------------------------------------
@@ -207,6 +267,10 @@ PRESENTE: dict[str, str] = {
     "geres": "gerencia",
     "voltaste": "voltou",
     "esqueceste": "esqueceu",
+    "tenhas": "tenha",
+    "chegaste": "chegou",
+    "possas": "possa",
+    "faças": "faça",
 }
 
 # --------------------------------------------------------------------------
@@ -255,6 +319,10 @@ IMPERATIVO: dict[str, str] = {
     "regista": "cadastre",
     "junta": "junte",
     "inscreve": "inscreva",
+    "inicia": "inicie",
+    "edita": "edite",
+    "retoma": "retome",
+    "agrupa": "agrupe",
 }
 
 # --------------------------------------------------------------------------
@@ -347,12 +415,6 @@ def converte(texto: str, caminho: str) -> str:
     for padrao, novo in VOCABULARIO:
         t = _troca(t, padrao, novo)
 
-    t = re.sub(
-        r"\bA (" + "|".join(GERUNDIO) + r")\b",
-        lambda m: _caixa(m.group(0), GERUNDIO[m.group(1).lower()]),
-        t,
-        flags=re.I,
-    )
 
     # Clíticos de 2ª pessoa. Os nomeados vêm antes da regra geral, que apenas
     # remove o "-te" restante — "convidamos-te" -> "convidamos".
@@ -384,6 +446,13 @@ def converte(texto: str, caminho: str) -> str:
             flags=re.I,
         )
 
+    # Expressões de sessão ANTES do imperativo: "Inicia sessão" precisa virar
+    # "Entre" enquanto ainda casa. Com a ordem invertida, o imperativo fazia
+    # "Inicia" -> "Inicie" e a expressão não achava mais nada, devolvendo
+    # "Inicie sessão" no lugar de "Entre" — regressão pega na tela, não no teste.
+    for padrao, novo in VERBOS_COM_CAIXA:
+        t = _troca(t, padrao, novo)
+
     # Imperativo ancorado: início da string, ou logo após . ! ? — : ou quebra.
     t = re.sub(
         r"(^|[.!?—:]\s+|\n)(" + "|".join(IMPERATIVO) + r")\b",
@@ -395,8 +464,17 @@ def converte(texto: str, caminho: str) -> str:
     for padrao, novo in VERBOS_GERAIS:
         t = re.sub(padrao, novo, t, flags=re.I)
 
-    for padrao, novo in VERBOS_COM_CAIXA:
-        t = _troca(t, padrao, novo)
+
+    # Gerúndio POR ÚLTIMO entre as trocas de verbo: "A iniciar sessão" só vira
+    # "A entrar" na etapa acima, e converter antes dela deixaria "A entrar" no
+    # texto — que a execução seguinte transformaria em "Entrando", quebrando a
+    # idempotência de que o uso em rebase depende.
+    t = re.sub(
+        r"\bA (" + "|".join(GERUNDIO) + r")\b",
+        lambda m: _caixa(m.group(0), GERUNDIO[m.group(1).lower()]),
+        t,
+        flags=re.I,
+    )
 
     t = re.sub(r"\s{2,}", " ", t)
 
