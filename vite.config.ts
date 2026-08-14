@@ -1,4 +1,5 @@
 import { sveltekit } from '@sveltejs/kit/vite';
+import { existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vitest/config';
 
@@ -23,6 +24,27 @@ function durockBrand(): Plugin {
 	return {
 		name: 'durock-brand',
 		enforce: 'pre',
+
+		// A swap that stops matching fails SILENTLY: the import resolves to
+		// upstream's component and the Revel logo comes back with no error at
+		// all. The way that happens is upstream renaming or deleting one of
+		// these files, which a rebase would carry in without a word. So assert
+		// both ends exist before the build starts — a loud failure here beats a
+		// production deploy wearing someone else's brand.
+		configResolved() {
+			const faltando = Object.entries(BRAND_SWAPS)
+				.flatMap(([upstream, fork]) => [upstream, fork])
+				.filter((caminho) => !existsSync(root + caminho));
+
+			if (faltando.length > 0) {
+				throw new Error(
+					`[durock-brand] estes arquivos não existem mais:\n  ${faltando.join('\n  ')}\n` +
+						`A troca da marca depende deles. Se o upstream renomeou o componente, ` +
+						`atualize BRAND_SWAPS em vite.config.ts — sem isso o site publica a marca do Revel.`
+				);
+			}
+		},
+
 		async resolveId(source, importer, options) {
 			if (!source.includes('brand/Revel')) return null;
 			const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
