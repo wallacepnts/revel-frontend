@@ -38,7 +38,7 @@
 		--muted-foreground: 0 0% 38%;
 		--accent: 41 100% 44%; /* DuRock: dourado */
 		--accent-foreground: 0 0% 6%;
-		--highlight: 38 94% 56%; /* amber badge/pop */
+		--highlight: 41 100% 72%; /* DuRock: mesmo dourado do accent, separado por luminosidade */
 		--highlight-foreground: 30 55% 12%;
 		--destructive: 350 78% 30%; /* maroon, never brand crimson */
 		--destructive-foreground: 0 0% 100%;
@@ -120,7 +120,7 @@
 		--muted-foreground: 0 0% 62%;
 		--accent: 50 100% 52%; /* DuRock: dourado no escuro */
 		--accent-foreground: 0 0% 6%;
-		--highlight: 38 94% 60%;
+		--highlight: 50 100% 78%; /* DuRock: mesmo dourado do accent, separado por luminosidade */
 		--highlight-foreground: 30 60% 10%;
 		--destructive: 0 70% 45%; /* FILL only: white label = 5.88:1; as TEXT it is 3.11:1 on --background / 2.85:1 on --card (issue #781) */
 		--destructive-foreground: 0 0% 100%;
