@@ -9410,5 +9410,8 @@
 	"memberScan.untitledTier": "Ticket",
 	"memberScan.checkInTicket": "Einchecken",
 	"memberScan.close": "Schließen",
-	"memberScan.checkedInSuccess": "Eingecheckt: {name}"
+	"memberScan.checkedInSuccess": "Eingecheckt: {name}",
+	"seo.homeTagline": "Rockkonzerte in Rio de Janeiro",
+	"seo.authLogin": "Anmelden",
+	"seo.authVerify": "Bestätige dein Konto"
 }

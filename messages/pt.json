@@ -9410,5 +9410,8 @@
 	"memberScan.untitledTier": "Ingresso",
 	"memberScan.checkInTicket": "Cadastrar entrada",
 	"memberScan.close": "Fechar",
-	"memberScan.checkedInSuccess": "Entrada registrada: {name}"
+	"memberScan.checkedInSuccess": "Entrada registrada: {name}",
+	"seo.homeTagline": "Shows de rock no Rio de Janeiro",
+	"seo.authLogin": "Entrar",
+	"seo.authVerify": "Verifique sua conta"
 }

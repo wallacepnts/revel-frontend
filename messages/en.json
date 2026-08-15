@@ -9410,5 +9410,8 @@
 	"memberScan.untitledTier": "Ticket",
 	"memberScan.checkInTicket": "Check in",
 	"memberScan.close": "Close",
-	"memberScan.checkedInSuccess": "Checked in: {name}"
+	"memberScan.checkedInSuccess": "Checked in: {name}",
+	"seo.homeTagline": "Rock shows in Rio de Janeiro",
+	"seo.authLogin": "Log in",
+	"seo.authVerify": "Verify your account"
 }

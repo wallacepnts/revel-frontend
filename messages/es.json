@@ -9410,5 +9410,8 @@
 	"memberScan.untitledTier": "Entrada",
 	"memberScan.checkInTicket": "Registrar entrada",
 	"memberScan.close": "Cerrar",
-	"memberScan.checkedInSuccess": "Entrada registrada: {name}"
+	"memberScan.checkedInSuccess": "Entrada registrada: {name}",
+	"seo.homeTagline": "Conciertos de rock en Río de Janeiro",
+	"seo.authLogin": "Iniciar sesión",
+	"seo.authVerify": "Verifica tu cuenta"
 }

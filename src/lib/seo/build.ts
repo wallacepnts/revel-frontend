@@ -15,6 +15,7 @@ import {
 	type Lang
 } from './constants';
 import type { SeoConfig } from './types';
+import * as m from '$lib/paraglide/messages.js';
 import { oembedDiscoveryUrl } from '$lib/embed/oembed';
 import { truncate, stripMarkup } from './text';
 import { sameUrlHreflang, landingPageHreflang } from './hreflang';
@@ -145,7 +146,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 	switch (input.kind) {
 		case 'home': {
-			const title = `${SITE_NAME} — Event Management for Communities`;
+			const title = `${SITE_NAME} — ${m['seo.homeTagline']()}`;
 			const description =
 				'Discover community events, connect with organizers, and create unforgettable experiences. Open-source event management and ticketing platform.';
 			// og:description has a tighter budget than the meta description:
@@ -179,7 +180,8 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 		}
 
 		case 'events-listing': {
-			const title = `Browse Events | ${SITE_NAME}`;
+			// The page's own H1 key, so the tab and the heading say the same thing.
+			const title = `${m['browse.events_title']()} | ${SITE_NAME}`;
 			const description = `Discover community events happening near you. Find concerts, workshops, meetups, and more on ${SITE_NAME}.`;
 			return {
 				title,
@@ -214,7 +216,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 		}
 
 		case 'orgs-listing': {
-			const title = `Discover Organizations | ${SITE_NAME}`;
+			const title = `${m['browse.organizations_title']()} | ${SITE_NAME}`;
 			const description = `Browse and discover community organizations on ${SITE_NAME}. Find event organizers, communities, and groups creating amazing experiences.`;
 			// Shorter variant for social previews (~125-char budget, #624).
 			const ogDescription = `Browse community organizations on ${SITE_NAME} — event organizers, communities, and groups creating amazing experiences.`;
@@ -425,8 +427,8 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 		case 'legal': {
 			const titles: Record<typeof input.doc, string> = {
-				privacy: `Privacy Policy | ${SITE_NAME}`,
-				terms: `Terms of Service | ${SITE_NAME}`
+				privacy: `${m['privacyPolicyPage.privacyPolicy']()} | ${SITE_NAME}`,
+				terms: `${m['termsOfServicePage.termsOfService']()} | ${SITE_NAME}`
 			};
 			return {
 				title: titles[input.doc],
@@ -454,12 +456,16 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 		}
 
 		case 'auth': {
+			// Three of these reuse the key the page itself already renders; only
+			// `login` and `verify` needed one, because the existing candidates
+			// (`passwordResetPage.title`, `register.title`) still carry "- Revel"
+			// baked into the string — see C6 in ../../../GOAL.md.
 			const titles: Record<typeof input.page, string> = {
-				login: `Log in | ${SITE_NAME}`,
-				register: `Create your account | ${SITE_NAME}`,
-				'password-reset': `Reset your password | ${SITE_NAME}`,
-				verify: `Verify your account | ${SITE_NAME}`,
-				unsubscribe: `Unsubscribe | ${SITE_NAME}`
+				login: `${m['seo.authLogin']()} | ${SITE_NAME}`,
+				register: `${m['register.createAccount']()} | ${SITE_NAME}`,
+				'password-reset': `${m['passwordResetPage.resetYourPassword']()} | ${SITE_NAME}`,
+				verify: `${m['seo.authVerify']()} | ${SITE_NAME}`,
+				unsubscribe: `${m['unsubscribePage.title']()} | ${SITE_NAME}`
 			};
 			const t = titles[input.page];
 			return {
