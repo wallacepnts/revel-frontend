@@ -287,7 +287,10 @@
 								role="alert"
 								aria-live="polite"
 							>
-								<p class="font-semibold text-destructive">{error}</p>
+								<!-- The catalogue message, not `error`: that string is built in
+								     +page.server.ts, where nothing in this repo can translate it,
+								     so rendering it puts English next to the translated line below. -->
+								<p class="font-semibold text-destructive">{m['eventsListPage.loadError']()}</p>
 								<p class="mt-2 text-sm text-muted-foreground">
 									{m['common.errors_refreshPage']()}
 								</p>
