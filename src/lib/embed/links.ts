@@ -35,7 +35,7 @@ export interface EmbedLinkAttribution {
  * Build an absolute, attributed link from an embed to the Revel web app.
  *
  * @param origin Origin the embed itself is served from (e.g. `https://letsrevel.io`).
- * @param path   Absolute app path, e.g. `/events/acme/summer-party`.
+ * @param path   Absolute app path, e.g. `/shows/acme/summer-party`.
  */
 export function buildEmbedLink(
 	origin: string,
@@ -52,12 +52,12 @@ export function buildEmbedLink(
 
 /** App path for an event detail page. */
 export function eventPath(orgSlug: string, eventSlug: string): string {
-	return `/events/${encodeURIComponent(orgSlug)}/${encodeURIComponent(eventSlug)}`;
+	return `/shows/${encodeURIComponent(orgSlug)}/${encodeURIComponent(eventSlug)}`;
 }
 
 /** App path for an event-series page. */
 export function seriesPath(orgSlug: string, seriesSlug: string): string {
-	return `/events/${encodeURIComponent(orgSlug)}/series/${encodeURIComponent(seriesSlug)}`;
+	return `/shows/${encodeURIComponent(orgSlug)}/series/${encodeURIComponent(seriesSlug)}`;
 }
 
 /** App path for an organization profile. */

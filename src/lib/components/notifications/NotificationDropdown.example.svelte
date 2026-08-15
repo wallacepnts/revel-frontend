@@ -118,7 +118,7 @@
 						<nav class="hidden items-center gap-6 md:flex">
 							<a href={resolve('/(public)', {})} class="text-sm font-medium hover:underline">Home</a
 							>
-							<a href={resolve('/(public)/events', {})} class="text-sm font-medium hover:underline"
+							<a href={resolve('/(public)/shows', {})} class="text-sm font-medium hover:underline"
 								>Events</a
 							>
 							<a

@@ -373,7 +373,7 @@
 
 						<!-- View Event Link -->
 						<a
-							href={resolve('/(public)/events/[id]', { id: eventMetadata.event_id })}
+							href={resolve('/(public)/shows/[id]', { id: eventMetadata.event_id })}
 							class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
 						>
 							<ExternalLink class="h-4 w-4" aria-hidden="true" />

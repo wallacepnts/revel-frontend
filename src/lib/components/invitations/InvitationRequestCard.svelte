@@ -122,7 +122,7 @@
 					<div class="min-w-0">
 						<h3 class="truncate text-lg font-bold">
 							<a
-								href={resolve('/(public)/events/[id]', { id: request.event.id })}
+								href={resolve('/(public)/shows/[id]', { id: request.event.id })}
 								class="hover:underline focus:underline focus:outline-none"
 							>
 								{request.event.name}
@@ -192,7 +192,7 @@
 					</button>
 				{/if}
 				<a
-					href={resolve('/(public)/events/[id]', { id: request.event.id })}
+					href={resolve('/(public)/shows/[id]', { id: request.event.id })}
 					class="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
 				>
 					{m['invitationRequestCard.viewEvent']()}

@@ -118,7 +118,7 @@
 	const eventUrlPreview = $derived.by(() => {
 		if (!organizationSlug) return '';
 		const slug = isEditingSlug ? editedSlug : currentSlug;
-		return `/events/${organizationSlug}/${slug || 'your-event-slug'}`;
+		return `/shows/${organizationSlug}/${slug || 'your-event-slug'}`;
 	});
 </script>
 

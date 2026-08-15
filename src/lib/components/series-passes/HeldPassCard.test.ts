@@ -85,7 +85,7 @@ describe('HeldPassCard', () => {
 			const link = screen.getByRole('link', { name: 'Yoga Wednesdays' });
 			expect(link).toHaveAttribute(
 				'href',
-				expect.stringContaining('/events/acme/series/yoga-wednesdays')
+				expect.stringContaining('/shows/acme/series/yoga-wednesdays')
 			);
 		});
 	});

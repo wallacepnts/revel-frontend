@@ -2,7 +2,7 @@ import type { RequestHandler } from './$types';
 
 const STATIC = [
 	{ path: '/', changefreq: 'daily', priority: '1.0' },
-	{ path: '/events', changefreq: 'hourly', priority: '0.9' },
+	{ path: '/shows', changefreq: 'hourly', priority: '0.9' },
 	{ path: '/organizations', changefreq: 'daily', priority: '0.8' },
 	{ path: '/login', changefreq: 'monthly', priority: '0.4' },
 	{ path: '/register', changefreq: 'monthly', priority: '0.4' },

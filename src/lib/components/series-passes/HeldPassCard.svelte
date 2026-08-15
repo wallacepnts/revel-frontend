@@ -68,7 +68,7 @@
 						<h3 class="text-lg font-bold">{heldPass.series_pass.name}</h3>
 						{#if seriesOrgSlug}
 							<a
-								href={resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+								href={resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 									org_slug: seriesOrgSlug,
 									series_slug: heldPass.series.slug
 								})}

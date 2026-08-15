@@ -96,6 +96,13 @@ VOCABULARIO: list[tuple[str, str]] = [
     ("geridos", "gerenciados"),
     ("proporcionalidade", "proporcionalidade"),
     (r"\bligação da reunião\b", "link da reunião"),
+    # DuRock é uma agenda de rock: o que o Revel chama de "evento" aqui é show.
+    # Trocar aqui, e não no catálogo, porque são ~720 strings num arquivo que o
+    # upstream reescreve a cada release. Gênero e artigos não mudam ("o evento"
+    # -> "o show"), então a concordância se mantém sozinha. O \b protege
+    # "eventual"/"eventualmente", que não são a mesma palavra.
+    (r"\beventos\b", "shows"),
+    (r"\bevento\b", "show"),
 ]
 
 # --------------------------------------------------------------------------

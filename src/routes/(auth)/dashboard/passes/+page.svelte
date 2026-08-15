@@ -90,7 +90,7 @@
 	{:else if passes.length === 0}
 		{#snippet browseEventsAction()}
 			<a
-				href={resolve('/(public)/events', {})}
+				href={resolve('/(public)/shows', {})}
 				class="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
 			>
 				{m['seriesPass.browseEvents']()}

@@ -30,7 +30,7 @@
 
 	const cardHref = $derived(
 		href ??
-			resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+			resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 				org_slug: series.organization.slug,
 				series_slug: series.slug
 			})

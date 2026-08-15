@@ -29,7 +29,7 @@
 		if (event) {
 			const slug = event.organization?.slug || '';
 			goto(
-				resolve('/(public)/events/[org_slug]/[event_slug]', {
+				resolve('/(public)/shows/[org_slug]/[event_slug]', {
 					org_slug: slug,
 					event_slug: event.slug
 				})

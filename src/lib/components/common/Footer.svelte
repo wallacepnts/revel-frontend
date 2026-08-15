@@ -129,7 +129,7 @@
 				<h3 class="mb-4 text-lg font-extrabold">{m['footer.resourcesTitle']()}</h3>
 				<ul class="space-y-2 text-sm">
 					<li>
-						<a href={resolve('/(public)/events', {})} class={footerLinkClass}>
+						<a href={resolve('/(public)/shows', {})} class={footerLinkClass}>
 							{m['nav.browseEvents']()}
 						</a>
 					</li>

@@ -34,7 +34,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	if (!locals.user) {
 		throw redirect(
 			302,
-			`/login?redirect=${encodeURIComponent(`/events/${org_slug}/${event_slug}/questionnaire/${questionnaireId}`)}`
+			`/login?redirect=${encodeURIComponent(`/shows/${org_slug}/${event_slug}/questionnaire/${questionnaireId}`)}`
 		);
 	}
 

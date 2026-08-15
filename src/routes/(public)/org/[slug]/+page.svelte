@@ -599,7 +599,7 @@
 						<!-- Calendar View Shortcut -->
 						<!-- eslint-disable svelte/no-navigation-without-resolve -- resolve() validates the path; the appended query/fragment cannot be expressed through resolve() -->
 						<a
-							href="/events?organization={organization.id}&organization_name={encodeURIComponent(
+							href="/shows?organization={organization.id}&organization_name={encodeURIComponent(
 								organization.name
 							)}&organization_slug={organization.slug}&viewMode=calendar"
 							class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
@@ -612,7 +612,7 @@
 						<!-- Browse All Button -->
 						<!-- eslint-disable svelte/no-navigation-without-resolve -- resolve() validates the path; the appended query/fragment cannot be expressed through resolve() -->
 						<a
-							href="/events?organization={organization.id}&organization_name={encodeURIComponent(
+							href="/shows?organization={organization.id}&organization_name={encodeURIComponent(
 								organization.name
 							)}&organization_slug={organization.slug}"
 							class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"

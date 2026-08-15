@@ -21,7 +21,7 @@ export const load: PageServerLoad = async ({ params, locals, fetch, url }) => {
 			headers
 		});
 		if (data) {
-			target = `/events/${data.organization.slug}/series/${data.slug}${url.search}`;
+			target = `/shows/${data.organization.slug}/series/${data.slug}${url.search}`;
 		} else {
 			// The client doesn't throw on HTTP errors — log the 404/410 path too,
 			// or a buyer bounced to `/` after paying leaves no trace.

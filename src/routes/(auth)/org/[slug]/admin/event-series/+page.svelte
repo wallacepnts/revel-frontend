@@ -44,7 +44,7 @@
 	 */
 	function viewSeries(seriesSlug: string): void {
 		goto(
-			resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+			resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 				org_slug: organization.slug,
 				series_slug: seriesSlug
 			})

@@ -49,7 +49,7 @@
 			toast.success(m['joinEventPage.toast_invited']({ eventName: evt.name }));
 			// The claim response carries no organization — the token does.
 			goto(
-				resolve('/(public)/events/[org_slug]/[event_slug]', {
+				resolve('/(public)/shows/[org_slug]/[event_slug]', {
 					org_slug: token?.organization_slug ?? '',
 					event_slug: evt.slug ?? token?.event_slug ?? ''
 				})
@@ -130,7 +130,7 @@
 			<Card>
 				<CardContent class="space-y-6 p-6 text-center sm:p-8">
 					<p class="text-sm text-muted-foreground">{m['joinEventPage.rejectedHint']()}</p>
-					<Button size="lg" class="w-full" href={resolve('/(public)/events', {})}>
+					<Button size="lg" class="w-full" href={resolve('/(public)/shows', {})}>
 						{m['joinEventPage.rejectedCta']()}
 					</Button>
 				</CardContent>

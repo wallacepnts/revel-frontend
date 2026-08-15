@@ -60,13 +60,13 @@ describe('buildSeo', () => {
 	it('event indexable: includes Event + Breadcrumb JSON-LD; no robots tag', () => {
 		const cfg = buildSeo({
 			kind: 'event',
-			url: url('/events/acme/my-event'),
+			url: url('/shows/acme/my-event'),
 			lang: 'en',
 			event: fakeEvent,
 			indexable: true
 		});
 		expect(cfg.title).toContain('My Event');
-		expect(cfg.canonical).toBe('https://letsrevel.io/events/acme/my-event');
+		expect(cfg.canonical).toBe('https://letsrevel.io/shows/acme/my-event');
 		expect(cfg.robots).toBeUndefined();
 		const types = cfg.jsonLd.map((j) => (j as Record<string, unknown>)['@type']);
 		expect(types).toContain('Event');
@@ -77,7 +77,7 @@ describe('buildSeo', () => {
 	it('event: strips markdown from the description (meta, og and twitter)', () => {
 		const cfg = buildSeo({
 			kind: 'event',
-			url: url('/events/acme/my-event'),
+			url: url('/shows/acme/my-event'),
 			lang: 'en',
 			event: {
 				...fakeEvent,
@@ -94,7 +94,7 @@ describe('buildSeo', () => {
 	it('event non-indexable: emits noindex,follow', () => {
 		const cfg = buildSeo({
 			kind: 'event',
-			url: url('/events/acme/my-event'),
+			url: url('/shows/acme/my-event'),
 			lang: 'en',
 			event: fakeEvent,
 			indexable: false

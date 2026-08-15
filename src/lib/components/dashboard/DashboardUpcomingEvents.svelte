@@ -17,7 +17,7 @@
 
 {#snippet seeAllAction()}
 	<a
-		href={resolve('/(public)/events', {})}
+		href={resolve('/(public)/shows', {})}
 		class="flex items-center gap-1 text-sm font-medium text-primary hover:underline"
 	>
 		<span>{m['dashboard.activityCards.seeAll']()}</span>

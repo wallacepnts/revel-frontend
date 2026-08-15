@@ -551,7 +551,7 @@
 						</p>
 						{#each feedbackQuestionnaires as questionnaireId (questionnaireId)}
 							<a
-								href={resolve('/(public)/events/[org_slug]/[event_slug]/questionnaire/[id]', {
+								href={resolve('/(public)/shows/[org_slug]/[event_slug]/questionnaire/[id]', {
 									org_slug: event.organization.slug,
 									event_slug: event.slug,
 									id: questionnaireId

@@ -293,7 +293,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 					generateEventJsonLd(event, canonical),
 					generateBreadcrumbJsonLd([
 						{ name: 'Home', url: origin },
-						{ name: 'Events', url: `${origin}/events` },
+						{ name: 'Events', url: `${origin}/shows` },
 						{ name: event.organization.name, url: `${origin}/org/${event.organization.slug}` },
 						{ name: event.name, url: canonical }
 					])

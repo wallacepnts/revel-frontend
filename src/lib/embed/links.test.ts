@@ -6,7 +6,7 @@ const ORIGIN = 'https://letsrevel.io';
 describe('buildEmbedLink', () => {
 	it('stamps the full attribution convention', () => {
 		const url = new URL(
-			buildEmbedLink(ORIGIN, '/events/acme/summer-party', {
+			buildEmbedLink(ORIGIN, '/shows/acme/summer-party', {
 				medium: 'list',
 				campaign: 'acme',
 				content: 'example.com'
@@ -14,7 +14,7 @@ describe('buildEmbedLink', () => {
 		);
 
 		expect(url.origin).toBe(ORIGIN);
-		expect(url.pathname).toBe('/events/acme/summer-party');
+		expect(url.pathname).toBe('/shows/acme/summer-party');
 		expect(url.searchParams.get('utm_source')).toBe('embed');
 		expect(url.searchParams.get('utm_medium')).toBe('list');
 		expect(url.searchParams.get('utm_campaign')).toBe('acme');
@@ -39,13 +39,13 @@ describe('buildEmbedLink', () => {
 
 describe('path builders', () => {
 	it('builds app paths', () => {
-		expect(eventPath('acme', 'summer-party')).toBe('/events/acme/summer-party');
-		expect(seriesPath('acme', 'friday-nights')).toBe('/events/acme/series/friday-nights');
+		expect(eventPath('acme', 'summer-party')).toBe('/shows/acme/summer-party');
+		expect(seriesPath('acme', 'friday-nights')).toBe('/shows/acme/series/friday-nights');
 		expect(organizationPath('acme')).toBe('/org/acme');
 	});
 
 	it('encodes slugs so a hostile slug cannot inject path segments', () => {
-		expect(eventPath('acme', '../../admin')).toBe('/events/acme/..%2F..%2Fadmin');
+		expect(eventPath('acme', '../../admin')).toBe('/shows/acme/..%2F..%2Fadmin');
 		expect(organizationPath('a b')).toBe('/org/a%20b');
 	});
 });

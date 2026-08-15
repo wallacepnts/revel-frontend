@@ -108,7 +108,7 @@
 				     audit-brand-themes.py cannot see this — the effective color is
 				     composited at paint time, not a token pair. -->
 					<a
-						href={resolve('/(public)/events', {})}
+						href={resolve('/(public)/shows', {})}
 						class="rounded-full border-2 border-[hsl(var(--poster-white))] bg-[hsl(var(--poster-ink)/0.20)] px-6 py-3 font-bold text-[hsl(var(--poster-white))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 					>
 						{m['nav.browseEvents']()}

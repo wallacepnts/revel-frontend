@@ -176,7 +176,7 @@ export function generateICalFromRevelEvent(event: {
 	// Create full URL to event using correct format: /events/org-slug/event-slug
 	const eventUrl =
 		typeof window !== 'undefined' && event.organization?.slug
-			? `${window.location.origin}/events/${event.organization.slug}/${event.slug}`
+			? `${window.location.origin}/shows/${event.organization.slug}/${event.slug}`
 			: undefined;
 
 	return generateICalFile(

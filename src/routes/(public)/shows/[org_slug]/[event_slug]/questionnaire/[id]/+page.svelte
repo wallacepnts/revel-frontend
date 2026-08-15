@@ -25,7 +25,7 @@
 	// admitted immediately, so we show an inline confirmation instead of redirecting. (#441)
 	let autoAccepted = $state(false);
 	const isTicketed = $derived(!!data.event.requires_ticket);
-	const eventUrl = $derived(`/events/${data.event.organization.slug}/${data.event.slug}`);
+	const eventUrl = $derived(`/shows/${data.event.organization.slug}/${data.event.slug}`);
 
 	// Submission mutation
 	const submitMutation = createMutation(() => ({
@@ -63,7 +63,7 @@
 				description: m['questionnaireSubmissionPage.toast_pending_description']()
 			});
 			goto(
-				resolve('/(public)/events/[org_slug]/[event_slug]', {
+				resolve('/(public)/shows/[org_slug]/[event_slug]', {
 					org_slug: data.event.organization.slug,
 					event_slug: data.event.slug
 				})
@@ -84,7 +84,7 @@
 
 	function goBackToEvent() {
 		goto(
-			resolve('/(public)/events/[org_slug]/[event_slug]', {
+			resolve('/(public)/shows/[org_slug]/[event_slug]', {
 				org_slug: data.event.organization.slug,
 				event_slug: data.event.slug
 			})
@@ -122,7 +122,7 @@
 				logoThumbnail={data.event.organization.logo_thumbnail_url}
 			/>
 			<a
-				href={resolve('/(public)/events/[org_slug]/[event_slug]', {
+				href={resolve('/(public)/shows/[org_slug]/[event_slug]', {
 					org_slug: data.event.organization.slug,
 					event_slug: data.event.slug
 				})}

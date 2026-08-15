@@ -222,7 +222,7 @@
 
 		// Fallback to context patterns for older notifications
 		if (context.event_id) {
-			return `/events/${context.event_id}`;
+			return `/shows/${context.event_id}`;
 		}
 		// Org-scoped contexts. The backend's context key is `organization_slug`;
 		// `org_slug` has never been emitted by any notification context, but is

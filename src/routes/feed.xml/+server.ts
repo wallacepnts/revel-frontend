@@ -69,7 +69,7 @@ export const GET: RequestHandler = async ({ fetch, url }) => {
      xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>Revel - Upcoming Events</title>
-    <link>${baseUrl}/events</link>
+    <link>${baseUrl}/shows</link>
     <description>Discover community events on Revel - concerts, workshops, meetups, and more.</description>
     <language>en</language>
     <lastBuildDate>${now}</lastBuildDate>
@@ -89,7 +89,7 @@ export const GET: RequestHandler = async ({ fetch, url }) => {
     <category>Community</category>
 ${events
 	.map((event) => {
-		const eventUrl = `${baseUrl}/events/${event.organization.slug}/${event.slug}`;
+		const eventUrl = `${baseUrl}/shows/${event.organization.slug}/${event.slug}`;
 		const description =
 			stripHtml(event.description) || `Join ${event.name} organized by ${event.organization.name}`;
 		const truncatedDescription =
@@ -148,7 +148,7 @@ ${events
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Revel - Upcoming Events</title>
-    <link>${baseUrl}/events</link>
+    <link>${baseUrl}/shows</link>
     <description>Discover community events on Revel.</description>
     <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
     <atom:link href="${baseUrl}/feed.xml" rel="self" type="application/rss+xml"/>

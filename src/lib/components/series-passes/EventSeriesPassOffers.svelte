@@ -46,7 +46,7 @@
 				title={m['seriesPass.sectionHeading']()}
 			/>
 			<a
-				href={resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+				href={resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 					org_slug: orgSlug,
 					series_slug: seriesSlug
 				})}

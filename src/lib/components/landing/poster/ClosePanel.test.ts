@@ -32,7 +32,7 @@ describe('ClosePanel', () => {
 		render(ClosePanel, { props: { canCreateOrg: false } });
 		expect(
 			screen.getByRole('link', { name: m['nav.browseEvents']() }).getAttribute('href')
-		).toMatch(/\/events$/);
+		).toMatch(/\/shows$/);
 	});
 
 	it('opens the demo CTA in a new tab without leaking the opener', () => {

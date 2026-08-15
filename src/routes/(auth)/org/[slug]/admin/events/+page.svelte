@@ -426,7 +426,7 @@
 
 								<div class="mt-auto flex flex-wrap gap-2">
 									<a
-										href={resolve('/(public)/events/[org_slug]/[event_slug]', {
+										href={resolve('/(public)/shows/[org_slug]/[event_slug]', {
 											org_slug: data.organization.slug,
 											event_slug: event.slug
 										})}

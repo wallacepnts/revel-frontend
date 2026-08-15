@@ -134,13 +134,13 @@
 
 		const params = filtersToParams(newFilters);
 		// eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() validates the route id; the appended query string cannot be expressed through resolve()
-		goto(`${resolve('/(public)/events', {})}?${params}`, { replaceState: false, keepFocus: true });
+		goto(`${resolve('/(public)/shows', {})}?${params}`, { replaceState: false, keepFocus: true });
 	}
 
 	function handleClearFilters(): void {
 		const params = filtersToParams(clearFilters());
 		// eslint-disable-next-line svelte/no-navigation-without-resolve -- resolve() validates the route id; the appended query string cannot be expressed through resolve()
-		goto(`${resolve('/(public)/events', {})}${params.toString() ? `?${params}` : ''}`, {
+		goto(`${resolve('/(public)/shows', {})}${params.toString() ? `?${params}` : ''}`, {
 			replaceState: false
 		});
 	}
@@ -413,7 +413,7 @@
 								year={calendarParams.year}
 								month={calendarParams.month}
 								week={calendarParams.week}
-								baseUrl="/events"
+								baseUrl="/shows"
 								preserveParams={[
 									'viewMode',
 									'city_id',

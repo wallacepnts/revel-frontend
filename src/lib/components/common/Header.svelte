@@ -22,13 +22,13 @@
 
 	// Navigation items for public users - using translated strings
 	const publicNavItems = $derived([
-		{ href: resolve('/(public)/events', {}), label: m['nav.browseEvents']() },
+		{ href: resolve('/(public)/shows', {}), label: m['nav.browseEvents']() },
 		{ href: resolve('/(public)/organizations', {}), label: m['nav.organizations']() }
 	]);
 
 	// Navigation items for authenticated users - using translated strings
 	const authNavItems = $derived([
-		{ href: resolve('/(public)/events', {}), label: m['nav.browseEvents']() },
+		{ href: resolve('/(public)/shows', {}), label: m['nav.browseEvents']() },
 		{ href: resolve('/(public)/organizations', {}), label: m['nav.organizations']() },
 		{ href: resolve('/(auth)/dashboard/tickets', {}), label: m['nav.myTickets']() },
 		{ href: resolve('/(auth)/dashboard/passes', {}), label: m['nav.myPasses']() },

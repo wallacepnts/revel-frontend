@@ -51,7 +51,7 @@
 				</a>
 			{:else}
 				<a
-					href={resolve('/(public)/events', {})}
+					href={resolve('/(public)/shows', {})}
 					class="rounded-full bg-[hsl(var(--poster-ink))] px-8 py-3.5 font-bold text-[hsl(var(--poster-white))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 				>
 					{m['nav.browseEvents']()}

@@ -84,14 +84,14 @@
 	// Check if we're currently navigating to this card's event. Lean cards never
 	// navigate in-app (they open an absolute URL in a new tab), so the overlay —
 	// and the store it depends on — is skipped entirely.
-	const eventUrl = $derived(`/events/${event.organization.slug}/${event.slug}`);
+	const eventUrl = $derived(`/shows/${event.organization.slug}/${event.slug}`);
 	const isNavigating = $derived(
 		!lean && $navigating !== null && $navigating.to?.url.pathname === eventUrl
 	);
 
 	const cardHref = $derived(
 		href ??
-			resolve('/(public)/events/[org_slug]/[event_slug]', {
+			resolve('/(public)/shows/[org_slug]/[event_slug]', {
 				org_slug: event.organization.slug,
 				event_slug: event.slug
 			})

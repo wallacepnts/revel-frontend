@@ -20,7 +20,7 @@ describe('requiresAuth', () => {
 		expect(requiresAuth(routeId)).toBe(true);
 	});
 
-	it.each(['/(public)/login', '/(public)/org/[slug]', '/(public)/events/[id]', '/'])(
+	it.each(['/(public)/login', '/(public)/org/[slug]', '/(public)/shows/[id]', '/'])(
 		'leaves %s public',
 		(routeId) => {
 			expect(requiresAuth(routeId)).toBe(false);

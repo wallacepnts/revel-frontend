@@ -122,7 +122,7 @@
 
 	function viewEvent(): void {
 		goto(
-			resolve('/(public)/events/[org_slug]/[event_slug]', {
+			resolve('/(public)/shows/[org_slug]/[event_slug]', {
 				org_slug: organizationSlug,
 				event_slug: event.slug
 			})

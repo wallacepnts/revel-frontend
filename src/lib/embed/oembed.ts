@@ -69,9 +69,13 @@ export function resolveOembedTarget(target: URL, siteOrigin: string): OembedTarg
 		};
 	}
 
-	if (segments[0] !== 'events') return null;
+	// `shows` is the public route; `events` is the old one, kept because an
+	// oEmbed consumer resolves whatever URL someone pasted, and links shared
+	// before the rename are still out there. The old path only 301s in the
+	// browser — a consumer calling this resolver never follows that redirect.
+	if (segments[0] !== 'shows' && segments[0] !== 'events') return null;
 
-	// /events/{org_slug}/series/{series_slug}
+	// /shows/{org_slug}/series/{series_slug}
 	if (segments.length === 4 && segments[2] === 'series') {
 		const [, orgSlug, , seriesSlug] = segments;
 		return {
@@ -82,12 +86,12 @@ export function resolveOembedTarget(target: URL, siteOrigin: string): OembedTarg
 		};
 	}
 
-	// /events/{org_slug}/{event_slug}
+	// /shows/{org_slug}/{event_slug}
 	//
 	// No need to exclude `series` here: a series URL always has four segments and
 	// was already matched above, so a three-segment path is unambiguously an
 	// event — including an event whose slug happens to be "series", which
-	// `/events/{org}/series` really does route to.
+	// `/shows/{org}/series` really does route to.
 	if (segments.length === 3) {
 		const [, orgSlug, eventSlug] = segments;
 		return {

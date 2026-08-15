@@ -505,7 +505,7 @@
 								/>
 							</div>
 							<a
-								href={resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+								href={resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 									org_slug: event.organization.slug,
 									series_slug: event.event_series.slug
 								})}
@@ -579,7 +579,7 @@
 									/>
 								</div>
 								<a
-									href={resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+									href={resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 										org_slug: event.organization.slug,
 										series_slug: event.event_series.slug
 									})}

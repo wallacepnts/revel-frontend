@@ -138,7 +138,7 @@
 			<Card>
 				<CardContent class="space-y-6 p-6 text-center sm:p-8">
 					<p class="text-sm text-muted-foreground">{m['joinOrgPage.rejectedHint']()}</p>
-					<Button size="lg" class="w-full" href={resolve('/(public)/events', {})}>
+					<Button size="lg" class="w-full" href={resolve('/(public)/shows', {})}>
 						{m['joinOrgPage.rejectedCta']()}
 					</Button>
 				</CardContent>

@@ -136,7 +136,7 @@ export function getEventTokenUrl(tokenId: string, orgSlug?: string, eventSlug?: 
 
 	if (orgSlug && eventSlug) {
 		// Visibility URL with query param
-		return `${baseUrl}/events/${orgSlug}/${eventSlug}?et=${tokenId}`;
+		return `${baseUrl}/shows/${orgSlug}/${eventSlug}?et=${tokenId}`;
 	}
 
 	// Claiming URL

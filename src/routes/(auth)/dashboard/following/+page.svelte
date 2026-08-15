@@ -392,7 +392,7 @@
 				</div>
 			{:else if eventSeries.length === 0}
 				{#snippet discoverEventSeriesAction()}
-					<Button href="/events" variant="default">
+					<Button href="/shows" variant="default">
 						{m['dashboard.following.discoverEventSeries']()}
 					</Button>
 				{/snippet}
@@ -423,7 +423,7 @@
 								{/if}
 								<div class="min-w-0 flex-1">
 									<a
-										href={resolve('/(public)/events/[org_slug]/series/[series_slug]', {
+										href={resolve('/(public)/shows/[org_slug]/series/[series_slug]', {
 											org_slug: series.organization.slug,
 											series_slug: series.slug
 										})}
