@@ -150,8 +150,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 				'Discover community events, connect with organizers, and create unforgettable experiences. Open-source event management and ticketing platform.';
 			// og:description has a tighter budget than the meta description:
 			// social previews truncate around ~125 chars on mobile (#624).
-			const ogDescription =
-				`Discover community events, connect with organizers, and create unforgettable experiences on ${SITE_NAME}, the open-source platform.`;
+			const ogDescription = `Discover community events, connect with organizers, and create unforgettable experiences on ${SITE_NAME}, the open-source platform.`;
 			return {
 				title,
 				description,
@@ -181,8 +180,7 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 		case 'events-listing': {
 			const title = `Browse Events | ${SITE_NAME}`;
-			const description =
-				`Discover community events happening near you. Find concerts, workshops, meetups, and more on ${SITE_NAME}.`;
+			const description = `Discover community events happening near you. Find concerts, workshops, meetups, and more on ${SITE_NAME}.`;
 			return {
 				title,
 				description,
@@ -217,11 +215,9 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 
 		case 'orgs-listing': {
 			const title = `Discover Organizations | ${SITE_NAME}`;
-			const description =
-				`Browse and discover community organizations on ${SITE_NAME}. Find event organizers, communities, and groups creating amazing experiences.`;
+			const description = `Browse and discover community organizations on ${SITE_NAME}. Find event organizers, communities, and groups creating amazing experiences.`;
 			// Shorter variant for social previews (~125-char budget, #624).
-			const ogDescription =
-				`Browse community organizations on ${SITE_NAME} — event organizers, communities, and groups creating amazing experiences.`;
+			const ogDescription = `Browse community organizations on ${SITE_NAME} — event organizers, communities, and groups creating amazing experiences.`;
 			const ld: object[] = [
 				generateBreadcrumbJsonLd([
 					{ name: 'Home', url: origin },
@@ -309,7 +305,8 @@ function buildSeoConfig(input: BuildSeoInput): SeoConfig {
 			const truncated = truncate(desc, 155);
 			const image = getOrgImage(org);
 			const title = `${org.name} | ${SITE_NAME}`;
-			const description = truncated || `${org.name} on ${SITE_NAME} - Community events and experiences`;
+			const description =
+				truncated || `${org.name} on ${SITE_NAME} - Community events and experiences`;
 			return {
 				title,
 				description,
