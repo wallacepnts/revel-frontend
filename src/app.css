@@ -38,6 +38,12 @@
 		--muted-foreground: 0 0% 38%;
 		--accent: 41 100% 44%; /* DuRock: dourado */
 		--accent-foreground: 0 0% 6%;
+		/* O dourado como TEXTO, pelo mesmo motivo do --destructive-text: o
+		   accent é preenchimento e deve 3:1, mas texto deve 4,5:1 e o
+		   41 100% 44% sobre papel branco dá só 2,40:1 (é o que o
+		   durockrj.com.br publica hoje). Escurecido até fechar 4,5 — o número
+		   sai do audit-brand-themes.py, não da mão. */
+		--accent-text: 41 100% 31%;
 		--highlight: 41 100% 72%; /* DuRock: mesmo dourado do accent, separado por luminosidade */
 		--highlight-foreground: 30 55% 12%;
 		--destructive: 350 78% 30%; /* maroon, never brand crimson */
@@ -120,6 +126,9 @@
 		--muted-foreground: 0 0% 62%;
 		--accent: 50 100% 52%; /* DuRock: dourado no escuro */
 		--accent-foreground: 0 0% 6%;
+		/* No escuro o próprio accent já dá 14:1 sobre o preto — os dois valores
+		   coincidem, como no par destructive/destructive-text no modo claro. */
+		--accent-text: 50 100% 52%;
 		--highlight: 50 100% 78%; /* DuRock: mesmo dourado do accent, separado por luminosidade */
 		--highlight-foreground: 30 60% 10%;
 		--destructive: 0 70% 45%; /* FILL only: white label = 5.88:1; as TEXT it is 3.11:1 on --background / 2.85:1 on --card (issue #781) */

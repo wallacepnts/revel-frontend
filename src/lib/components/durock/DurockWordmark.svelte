@@ -25,6 +25,12 @@
 		mark?: boolean;
 	}
 	const { class: className = '', mono = false, mark = true }: Props = $props();
+
+	// "Du" and "RJ" in gold, as durockrj.com.br has always shown them — but
+	// through --accent-text, not --accent: the fill gold measures 2.40:1 on
+	// white paper, below even the 3:1 large-text floor. `mono` is the knockout
+	// for coloured panels, where any hue would fight the panel, so it stays flat.
+	const gold = mono ? '' : 'text-[hsl(var(--accent-text))]';
 </script>
 
 <span class={cn('inline-flex items-center gap-2 text-2xl leading-none', className)}>
@@ -32,7 +38,7 @@
 		<DurockMark decorative gradient={!mono} class="h-[1em] w-auto" />
 	{/if}
 	<span class="tracking-tight">
-		<span class="font-extrabold">DuRock</span>
-		<span class="font-light">RJ</span>
+		<span class="font-extrabold"><span class={gold}>Du</span>Rock</span>
+		<span class="font-light {gold}">RJ</span>
 	</span>
 </span>

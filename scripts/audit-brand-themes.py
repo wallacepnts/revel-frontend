@@ -131,6 +131,12 @@ TEXT_PAIRS = [  # (fg, bg, min_ratio, note)
     ("muted-foreground", "background", 4.5, "muted text on page"),
     ("muted-foreground", "card", 4.5, "muted text on card"),
     ("accent-foreground", "accent", 4.5, "accent label"),
+    # The accent pair is SPLIT for the same reason as destructive: --accent is
+    # the fill, while the gold used as TEXT (the "Du"/"RJ" of the wordmark)
+    # owes 4.5:1 and reads --accent-text. The light fill measures 2.40:1 as
+    # text, which is what durockrj.com.br ships today.
+    ("accent-text", "background", 4.5, "wordmark gold as text on page"),
+    ("accent-text", "card", 4.5, "wordmark gold as text on card"),
     ("highlight-foreground", "highlight", 4.5, "highlight label"),
     ("destructive-foreground", "destructive", 4.5, "destructive label"),
     # The destructive pair is SPLIT (issue #781): --destructive is the fill and

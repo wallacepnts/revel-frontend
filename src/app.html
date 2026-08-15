@@ -4,7 +4,12 @@
 		<meta charset="utf-8" />
 		<!-- The brand exists only as PNG for now, so no SVG icon: an SVG entry
 		     wins over PNG in every browser, and logo.svg is still upstream's
-		     mark. The two below follow the OS colour scheme. -->
+		     mark. The three below follow the OS colour scheme, and ORDER
+		     MATTERS: browsers that ignore `media` on <link rel=icon> use the
+		     LAST match, so the no-media fallback must come FIRST and must be
+		     favicon-light.png — the same file durockrj.com.br serves. Putting
+		     a different fallback last is what silently swapped the icon. -->
+		<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon-light.png" />
 		<link
 			rel="icon"
 			type="image/png"
@@ -17,7 +22,6 @@
 			media="(prefers-color-scheme: dark)"
 			href="%sveltekit.assets%/favicon-dark.png"
 		/>
-		<link rel="icon" type="image/png" href="%sveltekit.assets%/favicon.png" />
 		<link rel="apple-touch-icon" href="%sveltekit.assets%/apple-touch-icon.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 		<meta name="theme-color" content="#0d1211" />
