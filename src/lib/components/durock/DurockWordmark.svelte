@@ -41,6 +41,8 @@
 		<DurockMark decorative gradient={!mono} class="h-[1.33em] w-auto" />
 	{/if}
 	<span class="tracking-tight">
+		<!-- "DuRock RJ" é a marca, idêntica em todo idioma; o "Du" sai num span
+		     próprio só para receber o dourado. i18n-ignore -->
 		<span class="font-extrabold"><span class={gold}>Du</span>Rock</span>
 		<span class="font-light {gold}">RJ</span>
 	</span>

@@ -6,13 +6,14 @@
 	import { accountUpdateLanguage } from '$lib/api/client';
 	import { getLanguageSwitchUrl } from '$lib/utils/seo-routes';
 	import type { SupportedLanguage } from '$lib/schemas/profile';
+	import { SUPPORTED_LANGUAGES } from '$lib/i18n';
 
 	// Current locale
 	const currentLocale = $derived(getLocale());
 
 	// Language options. We surface the ISO code (en/de/it/…) rather than a flag —
 	// flags map to countries, not languages, and read poorly at small sizes.
-	const languages = [
+	const ALL_LANGUAGES = [
 		{ code: 'en', name: 'English' },
 		{ code: 'de', name: 'Deutsch' },
 		{ code: 'it', name: 'Italiano' },
@@ -20,6 +21,14 @@
 		{ code: 'es', name: 'Español' },
 		{ code: 'pt', name: 'Português' }
 	] as const;
+
+	// Only the languages this instance offers (PUBLIC_AVAILABLE_LANGUAGES). With
+	// one language left there is nothing to switch between, so the whole control
+	// renders nothing — which is how a single-language instance loses the picker
+	// without any call site being edited or any catalogue being deleted.
+	const languages = ALL_LANGUAGES.filter((lang) =>
+		(SUPPORTED_LANGUAGES as readonly string[]).includes(lang.code)
+	);
 
 	// Dropdown open state
 	let isOpen = $state(false);
@@ -110,43 +119,47 @@
 </script>
 
 <!-- Language Switcher Dropdown -->
-<div class="relative" bind:this={containerEl}>
-	<!-- Trigger Button - ISO language code -->
-	<button
-		type="button"
-		onclick={() => (isOpen = !isOpen)}
-		class="flex items-center justify-center rounded-md px-2.5 py-2 text-sm font-semibold lowercase tracking-wide transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
-		aria-label={m['languageSwitcher.selectLanguage']({ name: currentLanguage.name })}
-		aria-expanded={isOpen}
-		aria-haspopup="true"
-		title={currentLanguage.name}
-	>
-		{currentLanguage.code}
-	</button>
-
-	<!-- Dropdown Menu -->
-	{#if isOpen}
-		<div
-			class="absolute right-0 top-full z-50 mt-2 w-48 rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
-			role="menu"
+{#if languages.length > 1}
+	<div class="relative" bind:this={containerEl}>
+		<!-- Trigger Button - ISO language code -->
+		<button
+			type="button"
+			onclick={() => (isOpen = !isOpen)}
+			class="flex items-center justify-center rounded-md px-2.5 py-2 text-sm font-semibold lowercase tracking-wide transition-colors hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
+			aria-label={m['languageSwitcher.selectLanguage']({ name: currentLanguage.name })}
+			aria-expanded={isOpen}
+			aria-haspopup="true"
+			title={currentLanguage.name}
 		>
-			{#each languages as lang (lang.code)}
-				<button
-					type="button"
-					onclick={() => switchLanguage(lang.code)}
-					class="flex w-full items-center gap-3 rounded-sm px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground {currentLocale ===
-					lang.code
-						? 'bg-accent/50 font-medium'
-						: ''}"
-					role="menuitem"
-				>
-					<span class="w-6 text-xs font-semibold uppercase text-muted-foreground">{lang.code}</span>
-					<span>{lang.name}</span>
-					{#if currentLocale === lang.code}
-						<span class="ml-auto text-xs text-muted-foreground">✓</span>
-					{/if}
-				</button>
-			{/each}
-		</div>
-	{/if}
-</div>
+			{currentLanguage.code}
+		</button>
+
+		<!-- Dropdown Menu -->
+		{#if isOpen}
+			<div
+				class="absolute right-0 top-full z-50 mt-2 w-48 rounded-md border bg-popover p-1 text-popover-foreground shadow-md"
+				role="menu"
+			>
+				{#each languages as lang (lang.code)}
+					<button
+						type="button"
+						onclick={() => switchLanguage(lang.code)}
+						class="flex w-full items-center gap-3 rounded-sm px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground {currentLocale ===
+						lang.code
+							? 'bg-accent/50 font-medium'
+							: ''}"
+						role="menuitem"
+					>
+						<span class="w-6 text-xs font-semibold uppercase text-muted-foreground"
+							>{lang.code}</span
+						>
+						<span>{lang.name}</span>
+						{#if currentLocale === lang.code}
+							<span class="ml-auto text-xs text-muted-foreground">✓</span>
+						{/if}
+					</button>
+				{/each}
+			</div>
+		{/if}
+	</div>
+{/if}

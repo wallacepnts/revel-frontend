@@ -162,6 +162,7 @@
 							rel="noopener noreferrer"
 							class="{footerLinkClass} inline-flex items-center gap-2"
 						>
+							<!-- i18n-ignore: nome próprio da plataforma, igual em todo idioma -->
 							<Youtube class="h-4 w-4" aria-hidden="true" />
 							YouTube
 						</a>

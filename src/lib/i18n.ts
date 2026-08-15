@@ -18,22 +18,39 @@ import { isEmbedPath } from '$lib/embed/constants';
 
 /**
  * Supported languages
+ *
+ * PUBLIC_AVAILABLE_LANGUAGES restringe a instância aos idiomas que ela de fato
+ * oferece — lista separada por vírgula, `pt` para um site só em português. Os
+ * catálogos continuam no disco e continuam compilando: apagá-los é metade da
+ * receita que transformou o fork antigo numa zona de 253 arquivos em conflito.
+ * Eles apenas deixam de ser escolhíveis. Vazia ou ausente significa todos os
+ * idiomas compilados, que é o comportamento do upstream sem mudança nenhuma.
+ *
+ * O que fica de fora reprova no `isSupportedLanguage` abaixo, e com isso as
+ * quatro vias de detecção (`?lang=`, os dois cookies e o `Accept-Language`)
+ * caem no DEFAULT_LANGUAGE em vez de trocar o idioma da interface.
  */
-export const SUPPORTED_LANGUAGES = [...locales];
+const configuredAvailable = env.PUBLIC_AVAILABLE_LANGUAGES?.split(',')
+	.map((lang) => lang.trim())
+	.filter((lang): lang is Locale => (locales as readonly string[]).includes(lang));
+
+export const SUPPORTED_LANGUAGES: readonly Locale[] =
+	configuredAvailable && configuredAvailable.length > 0 ? configuredAvailable : [...locales];
 
 /**
  * Default language
  *
  * PUBLIC_DEFAULT_LANGUAGE permite que uma instância seja "em português" sem
  * tocar em componente nenhum: é o idioma usado quando o visitante não pediu
- * outro (sem ?lang=, sem cookie e sem Accept-Language compatível). Cai em
- * baseLocale quando a variável não existe ou traz um idioma não suportado.
+ * outro (sem ?lang=, sem cookie e sem Accept-Language compatível). Validado
+ * contra SUPPORTED_LANGUAGES, não contra a lista compilada — um padrão fora
+ * dos idiomas oferecidos seria impossível de alcançar.
  */
 const configuredDefault = env.PUBLIC_DEFAULT_LANGUAGE;
 export const DEFAULT_LANGUAGE: Locale =
-	configuredDefault && (locales as readonly string[]).includes(configuredDefault)
+	configuredDefault && (SUPPORTED_LANGUAGES as readonly string[]).includes(configuredDefault)
 		? (configuredDefault as Locale)
-		: baseLocale;
+		: (SUPPORTED_LANGUAGES[0] ?? baseLocale);
 
 /**
  * Type guard: is the given string one of the supported locales?
