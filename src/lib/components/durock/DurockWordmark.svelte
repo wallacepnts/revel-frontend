@@ -35,7 +35,10 @@
 
 <span class={cn('inline-flex items-center gap-2 text-2xl leading-none', className)}>
 	{#if mark}
-		<DurockMark decorative gradient={!mono} class="h-[1em] w-auto" />
+		<!-- 1.33em, not 1em: durockrj.com.br pairs a 32px mark with 24px text,
+		     and keeping the ratio in `em` preserves the scaling the poster
+		     panels rely on. -->
+		<DurockMark decorative gradient={!mono} class="h-[1.33em] w-auto" />
 	{/if}
 	<span class="tracking-tight">
 		<span class="font-extrabold"><span class={gold}>Du</span>Rock</span>
